@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit4d2a710ece5ff2790eea819579c84345
 {
+    public static $files = array (
+        '0a80d26768cd24fcdbe75bdd719255c1' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
@@ -20,8 +24,25 @@ class ComposerStaticInit4d2a710ece5ff2790eea819579c84345
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPThumb\\Tests' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/tests',
+            ),
+            'PHPThumb' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'FB' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+        'FirePHP' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP.class.php',
+        'FirePHP_TestWrapper' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP_TestWrapper.class.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
@@ -43,6 +64,7 @@ class ComposerStaticInit4d2a710ece5ff2790eea819579c84345
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit4d2a710ece5ff2790eea819579c84345::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit4d2a710ece5ff2790eea819579c84345::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit4d2a710ece5ff2790eea819579c84345::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit4d2a710ece5ff2790eea819579c84345::$classMap;
 
         }, null, ClassLoader::class);
