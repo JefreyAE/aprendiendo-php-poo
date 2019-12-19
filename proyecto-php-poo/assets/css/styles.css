@@ -22,6 +22,25 @@ a:hover{
     color: #555555;
 }
 
+/* Alertas */
+
+.alert{
+    padding: 5px;
+    font-size: 14px;
+    color: white;
+    background: green;
+    box-shadow: 0px 1px 3px #ccc;
+    margin-bottom: 15px;
+    border-radius: 2px;
+}
+
+.alert-error{
+    background: red;
+}
+
+
+
+
 /*  Container  */
 
 #container{
