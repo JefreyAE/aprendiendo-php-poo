@@ -12,8 +12,10 @@ class UsuarioController {
         require_once 'views/usuario/registro.php';
     }
 
-    public function save() {
-        if (isset($_POST)) {
+    public function save(){
+        Utils::isAdmin();
+        
+        if (isset($_POST)) {          
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
             $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
             $email = isset($_POST['email']) ? $_POST['email'] : false;
@@ -77,40 +79,40 @@ class UsuarioController {
             $_SESSION['register'] = "failed";
         }
 
-        header("Location: " . base_url . "Usuario/registro");
+        header("Location: " . base_url . "Usuario/registro");   
     }
-    
-    public function login(){
-        if(isset($_POST)){
+
+    public function login() {
+        if (isset($_POST)) {
             //Identificar al usuario.          
             //Consulta sql.
             $usuario = new Usuario();
             $usuario->setEmail(trim($_POST['email']));
             $usuario->setPassword(trim($_POST['password']));
-            $identity = $usuario->login();   
+            $identity = $usuario->login();
             //Crear una session.
-      
-            if($identity && is_object($identity)){
+
+            if ($identity && is_object($identity)) {
                 $_SESSION['identity'] = $identity;
-                
-                if($identity->rol == 'admin'){
+
+                if ($identity->rol == 'admin') {
                     $_SESSION['admin'] = true;
-                }       
-            }else{
+                }
+            } else {
                 $_SESSION['error_login'] = "Identificación fallida.";
-            }        
+            }
         }
-        header("Location:".base_url);
+        header("Location:" . base_url);
     }
-    
-    public function logout(){
-        if(isset($_SESSION['identity'])){
+
+    public function logout() {
+        if (isset($_SESSION['identity'])) {
             Utils::deleteSession('identity');
         }
-         if(isset($_SESSION['admin'])){
+        if (isset($_SESSION['admin'])) {
             Utils::deleteSession('admin');
         }
-        header("Location:".base_url);
+        header("Location:" . base_url);
     }
 
 }

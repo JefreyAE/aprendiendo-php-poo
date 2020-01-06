@@ -53,31 +53,31 @@ class Producto{
     }
 
     function setId($id) {
-        $this->id = $id;
+        $this->id = $this->db->real_escape_string($id);
     }
 
     function setCategoria_id($categoria_id) {
-        $this->categoria_id = $categoria_id;
+        $this->categoria_id = $this->db->real_escape_string($categoria_id);
     }
 
     function setNombre($nombre) {
-        $this->nombre = $nombre;
+        $this->nombre = $this->db->real_escape_string($nombre);
     }
 
     function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
+        $this->descripcion = $this->db->real_escape_string($descripcion);
     }
 
     function setPrecio($precio) {
-        $this->precio = $precio;
+        $this->precio = $this->db->real_escape_string($precio);
     }
 
     function setStock($stock) {
-        $this->stock = $stock;
+        $this->stock = $this->db->real_escape_string($stock);
     }
 
     function setOferta($oferta) {
-        $this->oferta = $oferta;
+        $this->oferta = $this->db->real_escape_string($oferta);
     }
 
     function setFecha($fecha) {
@@ -92,6 +92,58 @@ class Producto{
         $sql = "SELECT * FROM productos ORDER BY id DESC;";
         $products = $this->db->query($sql);
         return $products;
+    }
+    
+    public function getProduct($id){      
+        $sql = "SELECT * FROM productos WHERE id=$id;";
+        $product = $this->db->query($sql);
+        return $product;
+    }
+    
+    public function save(){                                                                  
+        $sql = "INSERT INTO productos VALUES (null,'$this->categoria_id','$this->nombre','$this->descripcion','$this->precio','$this->stock','$this->oferta',CURDATE(),'$this->imagen');";
+        $save = $this->db->query($sql);
+        
+        // Para revisar errores en la consulta.
+        // echo $this->db->error;
+        // die();
+        
+        $result = false;
+        if($save){
+            $result = true;
+        }
+        return $result;
+    }
+    public function edit(){
+        $sql = "UPDATE productos SET nombre='$this->nombre',descripcion='$this->descripcion', categoria_id='$this->categoria_id', precio='$this->precio', stock='$this->stock', oferta='$this->oferta',fecha=CURDATE()";
+       
+        
+        if($this->getImagen() != null){
+            $sql .= ", imagen='{$this->getImagen()}' ";
+        }
+        
+        $sql .=" WHERE id='{$this->id}';";
+        /*echo $this->db->error;
+        echo $sql;
+        die();*/
+         
+        $update = $this->db->query($sql);
+        
+        $result = false;
+        if($update){
+            $result = true;
+        }
+        return $result;
+    }
+    public function delete(){
+        $sql = "DELETE FROM productos WHERE id='$this->id'";
+        $delete = $this->db->query($sql);
+        
+        $result = false;
+        if($delete){
+            $result = true;
+        }
+        return $result;
     }
 
 

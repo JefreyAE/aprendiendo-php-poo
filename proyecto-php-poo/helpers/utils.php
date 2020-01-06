@@ -24,6 +24,12 @@ class Utils {
             unset($_SESSION['errores']);
             $borrado = true;
         }
+        
+         if (isset($_SESSION['erroresProducto'])) {
+            $_SESSION['erroresProducto'] = null;
+            unset($_SESSION['erroresProducto']);
+            $borrado = true;
+        }
     }
 
     public static function isAdmin() {
@@ -40,6 +46,13 @@ class Utils {
         $categoria = new Categoria();
         $categorias = $categoria->getAll();
         return $categorias;
+    }
+    
+    public static function showProducto($id){
+        require_once 'models/Producto.php';
+        $producto = new Producto();
+        $producto = $producto->getProduct($id);
+        return $producto;
     }
 
 }
