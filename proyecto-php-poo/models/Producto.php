@@ -100,6 +100,21 @@ class Producto{
         return $product;
     }
     
+    public function getProductsByCategoria($id){      
+        $sql = "SELECT p.*, c.nombre AS cat_nombre FROM productos p "
+               ."INNER JOIN categorias c ON c.id=p.categoria_id "
+               ."WHERE categoria_id=$id "
+               ."ORDER BY id DESC";
+        $product = $this->db->query($sql);
+        return $product;
+    }
+    
+    public function getRandom($limit){
+        $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT $limit;";
+        $products = $this->db->query($sql);
+        return $products;               
+    }
+    
     public function save(){                                                                  
         $sql = "INSERT INTO productos VALUES (null,'$this->categoria_id','$this->nombre','$this->descripcion','$this->precio','$this->stock','$this->oferta',CURDATE(),'$this->imagen');";
         $save = $this->db->query($sql);

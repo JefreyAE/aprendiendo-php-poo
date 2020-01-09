@@ -7,8 +7,20 @@ class ProductoController {
     private $edit = false;
 
     public function index() {
+        
+        $products = new Producto();
+        $list = $products->getRandom(6);
         // renderizar vista        
         require_once 'views/producto/destacados.php';
+    }
+    
+    public function ver(){
+        if(isset($_GET['id'])){
+            $product = new Producto();
+            $producto = $product->getProduct($_GET['id'])->fetch_object();         
+        }
+    
+        require_once 'views/producto/ver.php';
     }
 
     public function gestion() {
@@ -123,7 +135,6 @@ class ProductoController {
                     $save = $producto->save();
                 }
                 
-
                 if ($save) {
                     $_SESSION['regProduct'] = "complete";
                     Utils::deleteSession('loadname');

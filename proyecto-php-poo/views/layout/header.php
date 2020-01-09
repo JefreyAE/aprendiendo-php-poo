@@ -12,7 +12,7 @@
             <header id="header">
                 <div id="logo">
                     <img src="<?=base_url?>/assets/img/camiseta.png" alt="camiseta Logo"/>
-                    <a href="index.php">
+                    <a href="<?=base_url?>">
                         Tienda de camisetas
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                     </li>
                     <?php while($categoria = $categorias->fetch_object()): ?>
                     <li>
-                        <a href="<?=base_url?>"><?=$categoria->nombre?></a>
+                        <a href="<?=base_url?>Categoria/ver&id=<?=$categoria->id?>"><?=$categoria->nombre?></a>
                     </li>      
                     <?php endwhile;?>
                 </ul>
